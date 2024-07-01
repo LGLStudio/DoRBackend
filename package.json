@@ -2,8 +2,9 @@
   "name": "backend_api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "node server.js"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "eslint": "^9.6.0",
+    "nodemon": "^3.1.4",
     "prettier": "^3.3.2"
   }
 }
