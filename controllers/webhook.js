@@ -17,6 +17,7 @@ exports.handleWebhook = async (req, res) => {
     switch (event.type) {
         case 'checkout.session.completed':
             const session = event.data.object;
+            // credit ecopocos
             await handleCheckoutSessionCompleted(session);
             break;
         // handle other event types

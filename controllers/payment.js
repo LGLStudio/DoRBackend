@@ -22,7 +22,10 @@ exports.createCheckoutSession = async (req, res) => {
             ],
             mode: 'payment',
             success_url: `${process.env.CLIENT_URL}/success`,
-            cancel_url: `${process.env.CLIENT_URL}/cancel`
+            cancel_url: `${process.env.CLIENT_URL}/cancel`,
+            metadata: {
+                userId: userId,
+            },
         });
 
         res.json({id: session.id});
