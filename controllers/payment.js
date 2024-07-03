@@ -1,9 +1,9 @@
 // création des sessions de paiement.
-
 const stripe = require('../config/stripe');
 
 exports.createCheckoutSession = async (req, res) => {
     const {id} = req.body; // ID du PaymentMethod
+    const userId = req.user.uid;
 
     try {
         const session = await stripe.checkout.sessions.create({

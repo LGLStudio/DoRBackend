@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use('/api', webhookRoutes);
+app.use('/api/webhook', webhookRoutes);
 
 
 const PORT = process.env.PORT || 5000;
