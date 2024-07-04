@@ -2,7 +2,12 @@
 const stripe = require('../config/stripe');
 
 exports.createCheckoutSession = async (req, res) => {
-    const {id} = req.body; // ID du PaymentMethod
+    const {uid} = req.body; // ID PaymentMethod
+
+    if (!uid) {
+        return res.status(400).send({error: 'UID is required'});
+    }
+
     const userId = req.user.uid;
 
     try {
@@ -30,6 +35,7 @@ exports.createCheckoutSession = async (req, res) => {
 
         res.json({id: session.id});
     } catch (error) {
+        console.error('Error creating checkout session:', error);
         res.status(500).json({error: error.message});
     }
 };
