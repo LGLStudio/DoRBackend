@@ -1,6 +1,6 @@
 // controllers/webhook.js
 const stripe = require('../config/stripe');
-const User = require('../models/user');
+const {db} = require('../config/firebase');
 
 exports.handleWebhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
@@ -32,7 +32,7 @@ const handleCheckoutSessionCompleted = async (session) => {
     const userId = session.metadata.userId;
 
     try {
-        const userRef = db.collection('Users').doc(userId);
+        const userRef = db.collection('users').doc(userId);
         const userDoc = await userRef.get();
 
         if (!userDoc.exists) {
@@ -41,7 +41,7 @@ const handleCheckoutSessionCompleted = async (session) => {
         }
 
         const userData = userDoc.data();
-        const newCoins = (userData.coins || 0) + 100; // Ajouter la monnaie virtuelle
+        const newCoins = (userData.coins || 0) + 100;
 
         await userRef.update({coins: newCoins});
 
