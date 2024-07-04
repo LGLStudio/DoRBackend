@@ -3,15 +3,13 @@ const stripe = require('../config/stripe');
 const {db} = require('../config/firebase');
 
 exports.handleWebhook = async (req, res) => {
-    console.log("Webhook received!");
     const sig = req.headers['stripe-signature'];
-    console.log("sig = ", sig)
 
     let event;
 
     try {
         console.log("on va try l'event")
-        event = stripe.webhooks.constructEvent(req.rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         console.log("Stripe event:", event)
     } catch (err) {
         console.log(`Webhook Error: ${err.message}`);
