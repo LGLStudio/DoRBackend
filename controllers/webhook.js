@@ -1,6 +1,6 @@
 // controllers/webhook.js
 const stripe = require('../config/stripe');
-const User = require('../models/User');
+const User = require('../models/user');
 
 exports.handleWebhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
