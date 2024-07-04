@@ -21,6 +21,7 @@ exports.createCheckoutSession = async (req, res) => {
         }
 
         const userData = userDoc.data();
+        console.log('User data:', userData);
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],

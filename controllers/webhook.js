@@ -39,9 +39,11 @@ const handleCheckoutSessionCompleted = async (session) => {
             console.log('No such user!');
             return;
         }
-
         const userData = userDoc.data();
         const newCoins = (userData.coins || 0) + 100;
+
+        console.log("fire userDoc = ", userDoc)
+        console.log("fire userData = ", userData)
 
         await userRef.update({coins: newCoins});
 
