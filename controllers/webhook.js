@@ -3,8 +3,9 @@ const stripe = require('../config/stripe');
 const {db} = require('../config/firebase');
 
 exports.handleWebhook = async (req, res) => {
+    console.log("la")
     const sig = req.headers['stripe-signature'];
-
+    console.log(sig)
     let event;
 
     try {
