@@ -17,28 +17,32 @@ connectDB();
 const app = express();
 
 // cors config
-app.use(cors({
-    origin: `${process.env.CLIENT_URL}`,
-    credentials: true, // cookies / sessions
-}));
+// app.use(cors({
+//     origin: `${process.env.CLIENT_URL}`,
+//     credentials: true, // cookies / sessions
+// }));
+//
+// // Additional headers for CORS
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+//     res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     next();
+// });
+//
+// app.use(bodyParser.json());
+//
+// // Handle preflight requests
+// app.options('*', cors({
+//     origin: process.env.CLIENT_URL,
+//     credentials: true,
+//     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+//     methods: 'GET,HEAD,OPTIONS,POST,PUT'
+// }));
 
-// Additional headers for CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-});
+app.use(cors());
 
 app.use(bodyParser.json());
-
-// Handle preflight requests
-app.options('*', cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    methods: 'GET,HEAD,OPTIONS,POST,PUT'
-}));
 
 // Routes
 app.use('/api/users', userRoutes);
