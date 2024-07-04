@@ -9,6 +9,9 @@ exports.handleWebhook = async (req, res) => {
 
     try {
         console.log("on va try l'event")
+        console.log("req.body = ", req.body)
+        console.log("sig = ", sig)
+        console.log("process.env.STRIPE_WEBHOOK_SECRET = ", process.env.STRIPE_WEBHOOK_SECRET)
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         console.log("Stripe event:", event)
     } catch (err) {
