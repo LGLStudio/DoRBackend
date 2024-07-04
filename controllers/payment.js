@@ -2,13 +2,11 @@
 const stripe = require('../config/stripe');
 
 exports.createCheckoutSession = async (req, res) => {
-    const {uid} = req.body; // ID PaymentMethod
+    const {uid, id} = req.body; // ID PaymentMethod
 
     if (!uid) {
         return res.status(400).send({error: 'UID is required'});
     }
-
-    const userId = req.user.uid;
 
     try {
         const session = await stripe.checkout.sessions.create({
