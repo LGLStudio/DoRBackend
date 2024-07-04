@@ -3,16 +3,11 @@ const stripe = require('../config/stripe');
 const {db} = require('../config/firebase');
 
 exports.handleWebhook = async (req, res) => {
-    console.log("la")
     const sig = req.headers['stripe-signature'];
-    console.log(sig)
     let event;
 
     try {
-        console.log("on va try l'event")
-        console.log("req.body = ", req.body)
-        console.log("sig = ", sig)
-        console.log("process.env.STRIPE_WEBHOOK_SECRET = ", process.env.STRIPE_WEBHOOK_SECRET)
+        console.log("juske la ok")
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         console.log("Stripe event:", event)
     } catch (err) {
@@ -37,7 +32,7 @@ exports.handleWebhook = async (req, res) => {
 };
 
 const handleCheckoutSessionCompleted = async (session) => {
-    console.log("session finit !")
+    console.log("session finit ! début")
     const userId = session.metadata.userId;
 
     try {
@@ -51,13 +46,11 @@ const handleCheckoutSessionCompleted = async (session) => {
         const userData = userDoc.data();
         const newCoins = (userData.coins || 0) + 100;
 
-        console.log("fire userDoc = ", userDoc)
-        console.log("fire userData = ", userData)
-
         await userRef.update({coins: newCoins});
-
-        console.log(`Updated coins for user ${userId}: ${newCoins}`);
+        console.log("try ok")
     } catch (error) {
+        console.log("try catch error")
+
         console.error('Error updating user coins:', error);
     }
 };

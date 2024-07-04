@@ -42,11 +42,17 @@ const app = express();
 
 app.use(cors());
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+// Use JSON parser for all non-webhook routes
+app.use((req, res, next) => {
+    if (req.originalUrl === '/api/webhook/stripe-webhook') {
+        next();
+    } else {
+        bodyParser.json()(req, res, next);
+    }
+});
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Middleware to handle Stripe Webhook raw body
-// app.post('/api/webhook', webhookRoutes);
 
 // Routes
 app.use('/api/users', userRoutes);
