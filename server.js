@@ -46,12 +46,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware to handle Stripe Webhook raw body
-app.use('/api/webhook', bodyParser.raw({ type: 'application/json' }));
+app.post('/api/webhook', bodyParser.raw({ type: 'application/json' }), webhookRoutes);
 
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use('/api/webhook', webhookRoutes);
+
 
 
 const PORT = process.env.PORT || 5000;
