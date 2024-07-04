@@ -45,6 +45,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Middleware to handle Stripe Webhook raw body
+app.use('/api/webhook', bodyParser.raw({ type: 'application/json' }));
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/payment', paymentRoutes);
