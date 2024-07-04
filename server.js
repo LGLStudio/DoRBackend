@@ -16,13 +16,11 @@ connectDB();
 // Middleware
 const app = express();
 
-// cors
+// cors config
 app.use(cors({
     origin: `${process.env.CLIENT_URL}`,
     credentials: true, // cookies / sessions
 }));
-
-app.use(bodyParser.json());
 
 // Additional headers for CORS
 app.use((req, res, next) => {
@@ -31,6 +29,16 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
 });
+
+app.use(bodyParser.json());
+
+// Handle preflight requests
+app.options('*', cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    methods: 'GET,HEAD,OPTIONS,POST,PUT'
+}));
 
 // Routes
 app.use('/api/users', userRoutes);
