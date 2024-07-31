@@ -7,9 +7,7 @@ exports.handleWebhook = async (req, res) => {
     let event;
 
     try {
-        console.log("juske la ok")
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-        console.log("Stripe event:", event)
     } catch (err) {
         console.log(`Webhook Error: ${err.message}`);
         return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -19,7 +17,6 @@ exports.handleWebhook = async (req, res) => {
     switch (event.type) {
         case 'checkout.session.completed':
             const session = event.data.object;
-            console.log("la session completed ", session)
             // credit ecopocos
             await handleCheckoutSessionCompleted(session);
             break;
@@ -32,7 +29,6 @@ exports.handleWebhook = async (req, res) => {
 };
 
 const handleCheckoutSessionCompleted = async (session) => {
-    console.log("session finit ! début")
     const userId = session.metadata.userId;
 
     try {
@@ -47,10 +43,7 @@ const handleCheckoutSessionCompleted = async (session) => {
         const newCoins = (userData.coins || 0) + 100;
 
         await userRef.update({coins: newCoins});
-        console.log("try ok")
     } catch (error) {
-        console.log("try catch error")
-
         console.error('Error updating user coins:', error);
     }
 };

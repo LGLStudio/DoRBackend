@@ -6,6 +6,7 @@ const userRoutes = require('./routes/users');
 const dotenv = require('dotenv');
 const paymentRoutes = require('./routes/payment');
 const webhookRoutes = require('./routes/webhook');
+const skinSalesRoutes = require('./routes/skinSales');
 
 dotenv.config();
 
@@ -58,6 +59,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/users', userRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/webhook', webhookRoutes);
+app.use('/api/skin-sales', skinSalesRoutes);
 
 
 const PORT = process.env.PORT || 5000;
