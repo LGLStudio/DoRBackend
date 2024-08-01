@@ -6,7 +6,7 @@ const skinSalesController = require('../controllers/skinSales');
 // router.get('/', skinSalesController.getSkins);
 // router.get('/:id', skinSalesController.getSkin);
 router.post('/', skinSalesController.createSkinSale);
-// router.put('/:id', skinSalesController.updateSkin);
+router.put('/:id', skinSalesController.buySkinSale);
 // router.delete('/:id', skinSalesController.deleteSkin);
 
 module.exports = router;
