@@ -25,15 +25,13 @@ exports.createSkinSale = async (req, res) => {
             return res.status(400).send({error: 'Skin is already on sale'});
         }
 
-        const skinId = skinPropertyDoc.data().skin; // Référence au document dans skins
-
         // Marquer le skin comme étant en vente
         await skinPropertyRef.update({is_on_sale: true});
 
         // Créez la vente de skin
         const skinSaleRef = db.db.collection('skin_sales').doc();
         await skinSaleRef.set({
-            skin: db.db.doc(`skins/${skinId.id}`),
+            skin_property: db.db.doc(`skin_properties/${skin_property_id}`),
             user_seller: db.db.doc(`users/${user_seller}`),
             price_without_commission: price_without_commission,
             fee: 10,
