@@ -61,6 +61,10 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/webhook', webhookRoutes);
 app.use('/api/skin-sales', skinSalesRoutes);
 
+// Test route
+app.get('/api/test', (req, res) => {
+    res.send('Hello World!');
+});
 
 const PORT = process.env.PORT || 5000;
 
