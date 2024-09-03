@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const paymentRoutes = require('./routes/payment');
 const webhookRoutes = require('./routes/webhook');
 const skinSalesRoutes = require('./routes/skinSales');
+const metricsRoutes = require('./routes/metrics');
 
 dotenv.config();
 
@@ -56,6 +57,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // Routes
+app.use('/api/metrics', metricsRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/webhook', webhookRoutes);
