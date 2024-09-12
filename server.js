@@ -42,8 +42,8 @@ const app = express();
 //     methods: 'GET,HEAD,OPTIONS,POST,PUT'
 // }));
 
-app.use(cors());
-
+// app.use(cors());
+app.use(cors({ origin: 'https://duel-of-reigns-web-site.vercel.app' }));
 // app.use(bodyParser.json());
 // Use JSON parser for all non-webhook routes
 app.use((req, res, next) => {
