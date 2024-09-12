@@ -52,6 +52,8 @@ exports.buySkinSale = async (req, res) => {
         return res.status(400).send({ error: 'Missing buyer ID or skin sale ID' });
     }
 
+    return res.status(200).send({ ok_gros: `on a Req : ${req} et Res ${res}` });
+
     try {
         const skinSaleRef = db.db.collection('skin_sales').doc(skin_sale_id);
         const skinSaleDoc = await skinSaleRef.get();
