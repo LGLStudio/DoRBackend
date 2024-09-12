@@ -45,8 +45,7 @@ exports.buySkinSale = async (req, res) => {
 
     const skinSaleId = req.params.id;
     if (!skinSaleId) {
-        console.log("error: Missing skin sale ID" );
-        // return res.status(400).send({ error: 'Missing skin sale ID' });
+        return res.status(400).send({ error: `Missing skin sale ID ${req}` });
     }
 
     if (!skin_sale_id || !user_buyer_id) {
